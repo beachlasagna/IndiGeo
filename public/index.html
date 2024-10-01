@@ -3,31 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Indian City Game</title>
+    <title>City Guessing Game</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js" defer></script>
 </head>
 <body>
-    <div class="game-container">
-        <h1>     IndiGeo</h1>
-        <button id="startGame">Start Game</button>
-        <div id="gameArea" style="display: none;">
-            <ul class="distance-list" id="distanceList"></ul>
-            <input type="text" id="cityGuess" placeholder="Guess the city...">
-            <button id="submitGuess">Submit Guess</button>
-            <button id="revealAnswer">Reveal Answer</button>
-            <p class="streak-message" id="streakMessage" style="display: none;"></p>
-            <p class="wrong-guess" id="wrongGuessMessage" style="display: none;"></p>
-            <div id="map"></div>
+    <div id="game-container">
+        <h1>Indian City Guessing Game</h1>
+        <form id="start-form">
+            <label for="player-name">Enter your name:</label>
+            <input type="text" id="player-name" required>
+            <button type="submit">Play Now</button>
+        </form>
+
+        <div id="game" class="hidden">
+            <h2>Guess the Hidden City</h2>
+            <p id="distance-hints"></p>
+            <input type="text" id="guess-input" placeholder="Enter your guess">
+            <button id="submit-guess">Submit Guess</button>
+            <button id="reveal-answer">Reveal Answer</button>
+            <p id="score"></p>
         </div>
-        <div class="leaderboard" id="leaderboard">
-            <h2 class="leaderboard-title">Leaderboard</h2>
-            <ul id="leaderboardList"></ul>
+
+        <div id="leaderboard-container">
+            <h2>Leaderboard</h2>
+            <ul id="leaderboard"></ul>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const form = document.getElementById('start-form');
+        const game = document.getElementById('game');
+        const leaderboardElement = document.getElementById('leaderboard');
+        const distanceHints = document.getElementById('distance-hints');
+        const scoreElement = document.getElementById('score');
+        let playerName = '';
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            playerName = document.getElementById('player-name').value;
+            form.classList.add('hidden');
+            game.classList.remove('hidden');
+            socket.emit('startGame', playerName);
+        });
+
+        document.getElementById('submit-guess').addEventListener('click', () => {
+            const guess = document.getElementById('guess-input').value;
+            socket.emit('guess', guess);
+        });
+
+        document.getElementById('reveal-answer').addEventListener('click', () => {
+            socket.emit('reveal');
+        });
+
+        socket.on('gameData', (data) => {
+            const hints = data.distances.map(d => `${d.city}: ${d.distance} km`).join('<br>');
+            distanceHints.innerHTML = hints;
+        });
+
+        socket.on('correctGuess', (streak) => {
+            scoreElement.textContent = `Correct! Your streak: ${streak}`;
+        });
+
+        socket.on('wrongGuess', (hiddenCity) => {
+            scoreElement.textContent = `Wrong! The hidden city was ${hiddenCity}.`;
+        });
+
+        socket.on('revealCity', (hiddenCity) => {
+            scoreElement.textContent = `The hidden city was ${hiddenCity}.`;
+        });
+
+        socket.on('leaderboard', (leaderboard) => {
+            leaderboardElement.innerHTML = leaderboard
+                .map(entry => `<li>${entry.name}: ${entry.streak}</li>`)
+                .join('');
+        });
+
+        socket.on('disconnect', () => {
+            alert('Disconnected from server');
+        });
+    </script>
 </body>
 </html>

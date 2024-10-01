@@ -93,6 +93,7 @@ const cities = {
     "Jammu": { lat: 32.7266, lon: 74.8570 },
     "Udhampur": { lat: 32.9363, lon: 75.3087 },
     "Kargil": { lat: 34.5566, lon: 76.1419 },
+
 };
 
 // Function to calculate distance
