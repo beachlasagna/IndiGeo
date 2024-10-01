@@ -35,3 +35,4 @@ To set up the project locally, follow these steps:
 
    ```bash
    git clone https://github.com/username/repository.git
+reach me out on discord if you need help : sleeezyy
