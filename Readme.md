@@ -1,12 +1,37 @@
+# Indian City Guessing Game
 
-### How to Use This README
+Welcome to the **Indian City Guessing Game**! This is a fun, multiplayer web-based game where players guess a hidden Indian city based on its distances to several major cities. It's an engaging way to test your knowledge of Indian geography!
 
-1. **Replace the Placeholder**: Make sure to replace `username` and `repository` with your actual GitHub username and the name of the repository.
+## Table of Contents
 
-2. **Add Additional Information**: Feel free to add any additional sections or information relevant to your game, such as a list of contributors, acknowledgments, or specific technologies used.
+- [Features](#features)
+- [Installation](#installation)
+- [How to Play](#how-to-play)
+- [Contributing](#contributing)
+- [License](#license)
 
-3. **Formatting**: You can add images or screenshots of the game if available, which can help visually enhance the README.
+## Features
 
-4. **Review and Test**: Before finalizing, review the instructions and test the steps to ensure they work as intended.
+- **Multiplayer Gameplay**: Play with friends or other players online.
+- **City Distances**: Guess the hidden city using the distances provided to seven major Indian cities.
+- **Leaderboard**: Track the top players based on their streaks.
+- **Interactive Map**: View city locations on a beautiful map.
+- **Dark Theme**: Enjoy a modern, dark-themed user interface.
 
-Once finalized, this README can be committed to your repository, and it will serve as a helpful guide for new contributors. If you need any more modifications or additional sections, just let me know!
+## Installation
+
+To set up the project locally, follow these steps:
+
+### Prerequisites
+
+- **Node.js** (v12 or later): [Download Node.js](https://nodejs.org/)
+- **Git** (optional, for cloning the repository): [Download Git](https://git-scm.com/)
+
+### Steps
+
+1. **Clone the Repository**
+
+   Open your terminal and run the following command:
+
+   ```bash
+   git clone https://github.com/username/repository.git
