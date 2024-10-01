@@ -35,3 +35,12 @@ To set up the project locally, follow these steps:
 
    ```bash
    git clone https://github.com/username/repository.git
+   ```
+
+   ```bash
+   cd IndiGeo
+   ```
+
+   ```bash
+   npm install
+   ```
