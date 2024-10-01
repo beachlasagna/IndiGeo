@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
                 cities[hiddenCity].lon,
                 cities[city].lat,
                 cities[city].lon
-            ).toFixed(2)
+            ).toFixed(0)
         })).slice(0, 7); // Get distances to 7 cities
 
         socket.emit('gameData', { hiddenCity, distances });
