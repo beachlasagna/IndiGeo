@@ -44,3 +44,5 @@ To set up the project locally, follow these steps:
    ```bash
    npm install
    ```
+  
+reach me out on discord if you need help : sleeezyy
