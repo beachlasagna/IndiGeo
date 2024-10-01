@@ -1,0 +1,115 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Game Container */
+.game-container {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* City Distance List */
+.distance-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.distance-item {
+    background-color: #333;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Input and Button Styles */
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #444;
+    color: #f0f0f0;
+    font-size: 1em;
+    margin-right: 10px; /* Add space between input and button */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Leaderboard */
+.leaderboard {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.leaderboard-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.leaderboard-item {
+    padding: 5px 0;
+}
+
+/* Map Container */
+#map {
+    height: 300px; /* Adjust height as needed */
+    width: 100%;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* Streak Message */
+.streak-message {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #4caf50; /* Green color for correct guess */
+}
+
+.wrong-guess {
+    color: #f44336; /* Red color for wrong guess */
+}
+
+/* Container for Buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Align buttons properly */
+    margin-top: 10px;
+}

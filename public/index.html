@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Indian City Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="game-container">
+        <h1>     IndiGeo</h1>
+        <button id="startGame">Start Game</button>
+        <div id="gameArea" style="display: none;">
+            <ul class="distance-list" id="distanceList"></ul>
+            <input type="text" id="cityGuess" placeholder="Guess the city...">
+            <button id="submitGuess">Submit Guess</button>
+            <button id="revealAnswer">Reveal Answer</button>
+            <p class="streak-message" id="streakMessage" style="display: none;"></p>
+            <p class="wrong-guess" id="wrongGuessMessage" style="display: none;"></p>
+            <div id="map"></div>
+        </div>
+        <div class="leaderboard" id="leaderboard">
+            <h2 class="leaderboard-title">Leaderboard</h2>
+            <ul id="leaderboardList"></ul>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+</body>
+</html>
