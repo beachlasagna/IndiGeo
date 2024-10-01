@@ -93,7 +93,7 @@ const cities = {
     "Jammu": { lat: 32.7266, lon: 74.8570 },
     "Udhampur": { lat: 32.9363, lon: 75.3087 },
     "Kargil": { lat: 34.5566, lon: 76.1419 },
-    // Add more cities as needed
+
 };
 
 // Function to calculate distance
@@ -115,8 +115,11 @@ let leaderboard = [];
 io.on('connection', (socket) => {
     let hiddenCity = '';
     let streak = 0;
+    let playerName = '';
 
-    socket.on('startGame', () => {
+    // Start the game
+    socket.on('startGame', (name) => {
+        playerName = name;  // Store player's name
         const cityNames = Object.keys(cities);
         hiddenCity = cityNames[Math.floor(Math.random() * cityNames.length)];
 
@@ -127,12 +130,13 @@ io.on('connection', (socket) => {
                 cities[hiddenCity].lon,
                 cities[city].lat,
                 cities[city].lon
-            ).toFixed(0)
+            ).toFixed(2)
         })).slice(0, 7); // Get distances to 7 cities
 
         socket.emit('gameData', { hiddenCity, distances });
     });
 
+    // Handle player guess
     socket.on('guess', (guess) => {
         if (guess === hiddenCity) {
             streak++;
@@ -142,14 +146,16 @@ io.on('connection', (socket) => {
         }
     });
 
+    // Reveal the hidden city
     socket.on('reveal', () => {
         socket.emit('revealCity', hiddenCity);
     });
 
-    socket.on('submitScore', (name) => {
-        leaderboard.push({ name, streak });
-        leaderboard.sort((a, b) => b.streak - a.streak);
-        socket.emit('leaderboard', leaderboard.slice(0, 5)); // Top 5 players
+    // Submit score to leaderboard
+    socket.on('submitScore', () => {
+        leaderboard.push({ name: playerName, streak });
+        leaderboard.sort((a, b) => b.streak - a.streak); // Sort leaderboard by streak
+        io.emit('leaderboard', leaderboard.slice(0, 5)); // Send top 5 scores to all clients
     });
 
     socket.on('disconnect', () => {
@@ -161,13 +167,4 @@ app.use(express.static('public'));
 
 server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});
-
-// Error handling
-process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
