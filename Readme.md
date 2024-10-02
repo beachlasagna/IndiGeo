@@ -1,4 +1,6 @@
-# Indian City Guessing Game
+![Archive Dev (1)](https://github.com/user-attachments/assets/1d4bf244-29fd-41a6-bdfe-3723cde78974)
+
+> 📷 by Sylwia Bartyzel
 
 Welcome to the **Indian City Guessing Game**! This is a fun, multiplayer web-based game where players guess a hidden Indian city based on its distances to several major cities. It's an engaging way to test your knowledge of Indian geography!
 
@@ -35,4 +37,12 @@ To set up the project locally, follow these steps:
 
    ```bash
    git clone https://github.com/username/repository.git
-reach me out on discord if you need help : sleeezyy
+   ```
+   -----
+   
+   ### Need Assistance?
+   Reach me out on Discord if you need help : sleeezyy
+
+
+### Support this Repository ⭐
+If you could Star this Repository, That would be Appreciated! 🙏
