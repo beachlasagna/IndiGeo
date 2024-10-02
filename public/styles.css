@@ -113,6 +113,6 @@ button:hover {
     justify-content: space-between; /* Align buttons properly */
     margin-top: 10px;
 }
-#revealAnswer {
+#reveal-answer {
     margin: 20px 0 10px;
 }
