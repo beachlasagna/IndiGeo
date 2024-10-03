@@ -1,6 +1,10 @@
 /* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
     background-color: #1a1a1a;
     color: #f0f0f0;
     margin: 0;
@@ -12,6 +16,7 @@ body {
 
 /* Header */
 h1 {
+
     font-size: 2.5em;
     margin-bottom: 20px;
 }
@@ -45,6 +50,9 @@ h1 {
 
 /* Input and Button Styles */
 input[type="text"] {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     width: 60%;
     padding: 10px;
     border: none;
@@ -52,10 +60,14 @@ input[type="text"] {
     background-color: #444;
     color: #f0f0f0;
     font-size: 1em;
-    margin-right: 10px; /* Add space between input and button */
+    margin-right: 10px;
+    /* Add space between input and button */
 }
 
 button {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -88,9 +100,29 @@ button:hover {
     padding: 5px 0;
 }
 
+/* logo */
+
+#logo {
+    max-width: 150px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+    transition: transform 0.3s ease;
+
+
+}
+
+
+#logo:hover {
+    transform: scale(1.05);
+}
+
+
 /* Map Container */
 #map {
-    height: 300px; /* Adjust height as needed */
+    height: 300px;
+    /* Adjust height as needed */
     width: 100%;
     border-radius: 8px;
     margin: 20px 0;
@@ -100,19 +132,26 @@ button:hover {
 .streak-message {
     font-size: 1.2em;
     margin: 10px 0;
-    color: #4caf50; /* Green color for correct guess */
+    color: #4caf50;
+    /* Green color for correct guess */
 }
 
 .wrong-guess {
-    color: #f44336; /* Red color for wrong guess */
+    color: #f44336;
+    /* Red color for wrong guess */
 }
 
 /* Container for Buttons */
 .button-container {
     display: flex;
-    justify-content: space-between; /* Align buttons properly */
+    justify-content: space-between;
+    /* Align buttons properly */
     margin-top: 10px;
 }
+
 #reveal-answer {
     margin: 20px 0 10px;
 }
+
+
+
