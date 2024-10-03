@@ -34,5 +34,5 @@ To set up the project locally, follow these steps:
    Open your terminal and run the following command:
 
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone [https://github.com/beachlasagna/IndiGeo]
 reach me out on discord if you need help : sleeezyy
