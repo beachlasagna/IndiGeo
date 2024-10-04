@@ -13,13 +13,14 @@
         <img src="./images//Capture-removebg-preview.png" alt="Logo" id="logo" style="max-width: 200px; margin: 20px 0; margin-left: 27%;">
         
         <form id="start-form">
-            <label for="player-name">Enter your name:</label>
-            <input type="text" id="player-name" required>
-            <button type="submit">Play Now</button>
+            <label id ="name-input" for="player-name">Enter your name:</label>
+            <input type="text" id="player-name" required placeholder="Enter your name">
+            <button id="the-button" type="submit">Play Now</button>
         </form>
+        <br>
 
         <div id="game" class="hidden">
-            <h2>Guess the Hidden City</h2>
+            <label id ="name-input" for="player-name">Guess the Hidden City</label>
             <p id="distance-hints"></p>
             <input type="text" id="guess-input" placeholder="Enter your guess">
             <button id="submit-guess">Submit Guess</button>
