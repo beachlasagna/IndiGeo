@@ -32,6 +32,7 @@ h1 {
     text-align: center;
 }
 
+
 #name-input{
     font-size: 1.5em;
 
@@ -67,6 +68,10 @@ input[type="text"] {
     font-size: 1em;
     margin-right: 10px;
     /* Add space between input and button */
+}
+
+.hidden2{
+    text-align: center;
 }
 
 button {
@@ -105,11 +110,16 @@ button:hover {
     padding: 5px 0;
 }
 
+#leaderboard-container{
+    text-align: center;
+}
+
 /* logo */
 
 #logo {
-    max-width: 150px;
-    margin: 20px 0;
+    max-width: 200px;
+    margin: 20px auto;
+    display: block;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 
