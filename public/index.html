@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Guessing Game</title>
-    <link rel="icon" href="./images/Capture-removebg-preview.png" type="image/png">
+    <link rel="icon" href="./images//Capture-removebg-preview.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -16,20 +16,26 @@
 </head>
 <body>
     <div id="game-container">
-        <h1>Indian City Guessing Game</h1>
-        <img src="./images//Capture-removebg-preview.png" alt="Logo" id="logo" style="max-width: 200px; margin: 20px 0; margin-left: 27%;">
+        <div id="overlay">
+            <h1>Indian City Guessing Game</h1>
+            <img src="./images//Capture-removebg-preview.png" alt="Logo" id="logo">
+        </div>
         
         <form id="start-form">
-            <label for="player-name">Enter your name:</label>
-            <input type="text" id="player-name" required>
-            <button type="submit">Play Now</button>
+            <label id ="name-input" for="player-name">Enter your name:</label>
+            <input type="text" id="player-name" required placeholder="Enter your name">
+            <button id="the-button" type="submit">Play Now</button>
         </form>
+        <br>
 
         <div id="game" class="hidden">
-            <h2>Guess the Hidden City</h2>
+            <label id ="name-input" for="player-name">Guess the Hidden City</label>
             <p id="distance-hints"></p>
             <input type="text" id="guess-input" placeholder="Enter your guess">
             <button id="submit-guess">Submit Guess</button>
+        </div>
+        <br>
+        <div class="hidden2">
             <button id="reveal-answer">Reveal Answer</button>
             <p id="score"></p>
             <div id="map"></div>
