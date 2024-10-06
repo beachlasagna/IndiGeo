@@ -6,6 +6,13 @@
     <title>City Guessing Game</title>
     <link rel="icon" href="./images//Capture-removebg-preview.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
 </head>
 <body>
     <div id="game-container">
@@ -31,6 +38,7 @@
         <div class="hidden2">
             <button id="reveal-answer">Reveal Answer</button>
             <p id="score"></p>
+            <div id="map"></div>
         </div>
 
         <div id="leaderboard-container">
@@ -38,7 +46,7 @@
             <ul id="leaderboard"></ul>
         </div>
     </div>
-
+    
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
@@ -47,51 +55,107 @@
         const leaderboardElement = document.getElementById('leaderboard');
         const distanceHints = document.getElementById('distance-hints');
         const scoreElement = document.getElementById('score');
+        const mapElement = document.getElementById('map');
         let playerName = '';
-
+        let map, marker, guessLatLng;
+    
+        // Initialize map and start game on form submit
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             playerName = document.getElementById('player-name').value;
             form.classList.add('hidden');
             game.classList.remove('hidden');
+    
             socket.emit('startGame', playerName);
+    
+            // Initialize the map
+            map = L.map('map').setView([20.5937, 78.9629], 5);
+    
+            // Add the tile layer from OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+    
+            // Handle map clicks to make guesses
+            map.on('click', (e) => {
+                const { lat, lng } = e.latlng;
+    
+                // Remove the previous marker if it exists
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+    
+                // Place a new marker for the guess
+                marker = L.marker([lat, lng]).addTo(map);
+                guessLatLng = { lat, lng };
+            });
         });
-
+    
+        // Listen for the submit-guess button to submit the current map click guess
         document.getElementById('submit-guess').addEventListener('click', () => {
-            const guess = document.getElementById('guess-input').value;
-            socket.emit('guess', guess);
+            if (guessLatLng) {
+                socket.emit('guess', guessLatLng); // Emit the guess to the server
+            } else {
+                alert("Please make a guess on the map by clicking.");
+            }
         });
-
+    
+        // Listen for reveal-answer button to show the hidden city
         document.getElementById('reveal-answer').addEventListener('click', () => {
-            socket.emit('reveal');
+            socket.emit('reveal'); // Emit reveal event to server
         });
-
+    
+        // Receive game data and display distance hints
         socket.on('gameData', (data) => {
             const hints = data.distances.map(d => `${d.city}: ${d.distance} km`).join('<br>');
             distanceHints.innerHTML = hints;
         });
-
+    
+        // Handle correct guess and update streak
         socket.on('correctGuess', (streak) => {
             scoreElement.textContent = `Correct! Your streak: ${streak}`;
         });
-
+    
+        // Handle wrong guess
         socket.on('wrongGuess', (hiddenCity) => {
             scoreElement.textContent = `Wrong! The hidden city was ${hiddenCity}.`;
         });
-
-        socket.on('revealCity', (hiddenCity) => {
-            scoreElement.textContent = `The hidden city was ${hiddenCity}.`;
+    
+        // Reveal the hidden city on the map when server sends it
+        socket.on('revealCity', (hiddenCityData) => {
+            const { lat, lng, city } = hiddenCityData;
+    
+            if (city) { // Check if city is defined
+                scoreElement.textContent = `The hidden city was ${city}.`;
+    
+                // Add a marker for the hidden city on the map
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup(`<b>${city}</b>`)
+                    .openPopup();
+    
+                // Pan and zoom the map to the revealed city
+                map.setView([lat, lng], 6); // Adjust zoom to focus on the city
+            } else {
+                console.error("City data is undefined:", hiddenCityData);
+                scoreElement.textContent = `The hidden city was undefined.`;
+            }
         });
-
+    
+        // Update leaderboard with players' streaks
         socket.on('leaderboard', (leaderboard) => {
             leaderboardElement.innerHTML = leaderboard
                 .map(entry => `<li>${entry.name}: ${entry.streak}</li>`)
                 .join('');
         });
-
+    
+        // Handle server disconnection
         socket.on('disconnect', () => {
             alert('Disconnected from server');
         });
     </script>
+    
+    
+    
+    
 </body>
 </html>

@@ -21,6 +21,7 @@ startGameButton.onclick = () => {
 
 // Receive Game Data
 socket.on('gameData', (data) => {
+
     hiddenCity = data.hiddenCity; // Store the hidden city
     distanceList.innerHTML = ''; // Clear previous distances
     streak = 0; // Reset streak
@@ -51,7 +52,8 @@ function initMap(distances) {
         // Add more cities as needed
     };
 
-    const map = L.map('map').setView([20.5937, 78.9629], 5); // Centered on India
+    const map = L.map('map');
+    map.setView([20.5937, 78.9629], 5); // Centered on India
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,

@@ -136,11 +136,13 @@ button:hover {
 
 /* Map Container */
 #map {
-    height: 300px;
+    position: relative;
+    height: 350px;
     /* Adjust height as needed */
     width: 100%;
     border-radius: 8px;
     margin: 20px 0;
+    z-index: 9999;
 }
 
 /* Streak Message */
